@@ -99,6 +99,10 @@ func main() {
 		logger.FatalLog("failed to initialize i18n: " + err.Error())
 	}
 
+	// 加载敏感词列表和响应
+	config.LoadSensitiveWordsFromFile()
+	config.LoadSensitiveResponseFromFile()
+
 	// Initialize HTTP server
 	server := gin.New()
 	server.Use(gin.Recovery())
@@ -110,6 +114,9 @@ func main() {
 	// Initialize session store
 	store := cookie.NewStore([]byte(config.SessionSecret))
 	server.Use(sessions.Sessions("session", store))
+
+	// 初始化敏感词过滤器
+	middleware.SensitiveFilter()
 
 	router.SetRouter(server, buildFS)
 	var port = os.Getenv("PORT")

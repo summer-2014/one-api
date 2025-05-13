@@ -1,6 +1,8 @@
 module github.com/songquanpeng/one-api
 
-go 1.20
+go 1.23.0
+
+toolchain go1.24.2
 
 require (
 	cloud.google.com/go/iam v1.1.10
@@ -26,12 +28,12 @@ require (
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/crypto v0.31.0
 	golang.org/x/image v0.18.0
-	golang.org/x/sync v0.10.0
+	golang.org/x/sync v0.14.0
 	google.golang.org/api v0.187.0
-	gorm.io/driver/mysql v1.5.6
+	gorm.io/driver/mysql v1.5.7
 	gorm.io/driver/postgres v1.5.7
 	gorm.io/driver/sqlite v1.5.1
-	gorm.io/gorm v1.25.10
+	gorm.io/gorm v1.26.1
 )
 
 require (
@@ -59,8 +61,8 @@ require (
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
-	github.com/go-sql-driver/mysql v1.8.1 // indirect
-	github.com/goccy/go-json v0.10.3 // indirect
+	github.com/go-sql-driver/mysql v1.9.2 // indirect
+	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
@@ -78,6 +80,7 @@ require (
 	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/jtolds/gls v4.20.0+incompatible // indirect
+	github.com/king133134/sensfilter v0.3.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
@@ -100,7 +103,7 @@ require (
 	golang.org/x/net v0.26.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
-	golang.org/x/text v0.21.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240617180043-68d350f18fd4 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240624140628-dc46fd24d27d // indirect

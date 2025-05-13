@@ -117,5 +117,7 @@ func SetApiRouter(router *gin.Engine) {
 		{
 			groupRoute.GET("/", controller.GetGroups)
 		}
+		// 敏感词过滤设置
+		apiRouter.PUT("/setting/sensitive-filter", middleware.AdminAuth(), controller.UpdateSensitiveFilterSetting)
 	}
 }

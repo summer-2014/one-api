@@ -41,6 +41,12 @@ func InitOptionMap() {
 	config.OptionMap["ChannelDisableThreshold"] = strconv.FormatFloat(config.ChannelDisableThreshold, 'f', -1, 64)
 	config.OptionMap["EmailDomainRestrictionEnabled"] = strconv.FormatBool(config.EmailDomainRestrictionEnabled)
 	config.OptionMap["EmailDomainWhitelist"] = strings.Join(config.EmailDomainWhitelist, ",")
+	
+	// 敏感词过滤配置
+	config.OptionMap["SensitiveFilterEnabled"] = strconv.FormatBool(config.SensitiveFilterEnabled)
+	config.OptionMap["SensitiveWords"] = strings.Join(config.SensitiveWords, ",")
+	config.OptionMap["SensitiveFilterResponse"] = config.SensitiveFilterResponse
+	
 	config.OptionMap["SMTPServer"] = ""
 	config.OptionMap["SMTPFrom"] = ""
 	config.OptionMap["SMTPPort"] = strconv.Itoa(config.SMTPPort)
@@ -153,11 +159,35 @@ func updateOptionMap(key string, value string) (err error) {
 			config.DisplayInCurrencyEnabled = boolValue
 		case "DisplayTokenStatEnabled":
 			config.DisplayTokenStatEnabled = boolValue
+		case "SensitiveFilterEnabled":
+			config.SensitiveFilterEnabled = boolValue
 		}
 	}
 	switch key {
 	case "EmailDomainWhitelist":
 		config.EmailDomainWhitelist = strings.Split(value, ",")
+	case "SensitiveWords":
+		// 保存原始格式的敏感词列表到配置项
+		config.OptionMap["SensitiveWords"] = value
+		
+		// 处理敏感词列表，支持每行一个敏感词或逗号分隔
+		var words []string
+		// 首先按逗号分隔
+		commaSplit := strings.Split(value, ",")
+		for _, part := range commaSplit {
+			// 按换行符分隔
+			lines := strings.Split(part, "\n")
+			for _, line := range lines {
+				// 去除空白字符
+				word := strings.TrimSpace(line)
+				if word != "" {
+					words = append(words, word)
+				}
+			}
+		}
+		config.SensitiveWords = words
+	case "SensitiveFilterResponse":
+		config.SensitiveFilterResponse = value
 	case "SMTPServer":
 		config.SMTPServer = value
 	case "SMTPPort":

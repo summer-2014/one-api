@@ -41,6 +41,13 @@ var WeChatAuthEnabled = false
 var TurnstileCheckEnabled = false
 var RegisterEnabled = true
 
+// 敏感词过滤配置
+var SensitiveFilterEnabled = true
+var SensitiveWords = []string{}
+var SensitiveFilterResponse = "您的请求包含敏感内容，已被系统拦截。"
+var SensitiveWordsFile = env.String("SENSITIVE_WORDS_FILE", "/data/config/sensitive_words.txt")
+var SensitiveResponseFile = env.String("SENSITIVE_RESPONSE_FILE", "/data/config/sensitive_response.txt")
+
 var EmailDomainRestrictionEnabled = false
 var EmailDomainWhitelist = []string{
 	"gmail.com",
