@@ -103,6 +103,10 @@ func main() {
 	config.LoadSensitiveWordsFromFile()
 	config.LoadSensitiveResponseFromFile()
 
+	// 初始化敏感词过滤器（同时会初始化增强的敏感词过滤器）
+	middleware.GetSensitiveFilter()
+	middleware.GetEnhancedSensitiveFilter()
+
 	// Initialize HTTP server
 	server := gin.New()
 	server.Use(gin.Recovery())
@@ -115,8 +119,8 @@ func main() {
 	store := cookie.NewStore([]byte(config.SessionSecret))
 	server.Use(sessions.Sessions("session", store))
 
-	// 初始化敏感词过滤器
-	middleware.SensitiveFilter()
+	// 添加敏感词过滤中间件
+	server.Use(middleware.SensitiveFilter())
 
 	router.SetRouter(server, buildFS)
 	var port = os.Getenv("PORT")
